@@ -1,5 +1,6 @@
 socket io server 
 run on local host port 8080
+run: node index.js
 save the messages in two local json files:
 1 - for public messages
 2 - for all privet messages
