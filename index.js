@@ -10,7 +10,30 @@ const {
 } = require("./handleData");
 require("dotenv").config();
 const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
+const path = require("path");
 
+
+const privateMessagesFilePath = path.join(__dirname, "privatMessages.json");
+const usersMsgsKeysFilePath = path.join(__dirname, "usersMsgsKeys.json");
+const publicMessagesFilePath = path.join(__dirname, "publicMessages.json");
+
+const initializeJSONFiles = () => {
+  if (!fs.existsSync(privateMessagesFilePath)) {
+    fs.writeFileSync("privatMessages.json", "{}");
+    console.log("privatMessages.json created.");
+  }
+
+  if (!fs.existsSync(usersMsgsKeysFilePath)) {
+    fs.writeFileSync("usersMsgsKeys.json", "{}");
+    console.log("usersMsgsKeys.json created.");
+  }
+  if (!fs.existsSync(publicMessagesFilePath)) {
+    fs.writeFileSync("publicMessages.json", "{}");
+    console.log("publicMessages.json created.");
+  }
+};
+initializeJSONFiles()
 const usersConnected = new Map();
 const io = new Server(8080, {
   cors: {
@@ -33,6 +56,8 @@ async function wait(sec) {
     setTimeout(resolve, sec * 1000);
   });
 }
+
+
 
 io.on("connection", function connection(socket) {
   const validUser = socket.handshake.query.userName;

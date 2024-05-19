@@ -1,5 +1,5 @@
 node_modules/
 .env
-privetMessages.json
+privatMessages.json
 publicMessages.json
 usersMsgsKeys.json
